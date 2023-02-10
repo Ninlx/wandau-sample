@@ -133,7 +133,9 @@ function animate() {
   if (running === false) {
     startTime = null
     return
-  } let timeDelta = Math.min(1, (performance.now() - startTime) / settings.preloaderAnimationDuration)
+  }
+
+  let timeDelta = Math.min(1, (performance.now() - startTime) / settings.preloaderAnimationDuration)
   showedProgress = progressStep + progressDelta * timeDelta
 
   if (timeDelta <= 1) {
