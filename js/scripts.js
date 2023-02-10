@@ -11,6 +11,7 @@
     }
   })
 
+  /* not included */
   /* ====== data background image ====== */
   var pageSection = $("*")
   pageSection.each(function (indx) {
@@ -64,6 +65,7 @@
   } else {
     }
 
+  /* not included */
   /* ====== slider ====== */
   var artsliderimages = new Swiper(".art-slider-images", {
     spaceBetween: 0,
@@ -92,6 +94,7 @@
     }
   })
 
+  /* not included */
   /* ====== slider thumbs ====== */
   var artslidercontent = new Swiper(".art-slider-content", {
     spaceBetween: 30,
@@ -115,6 +118,7 @@
     }
   })
 
+  /* not included */
   if ($(".art-slider-images")[0]) {
     artsliderimages.controller.control = artslidercontent
     artslidercontent.controller.control = artsliderimages

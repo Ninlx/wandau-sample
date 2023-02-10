@@ -164,6 +164,7 @@ function hidePreloader() {
 
 var resizeTimer
 
+/* not included */
 /* ====== locomotive ====== */
 gsap.registerPlugin(ScrollTrigger)
 const locoScroll = new LocomotiveScroll({
@@ -172,5 +173,6 @@ const locoScroll = new LocomotiveScroll({
   class: "is-inview",
 })
 
+/* not included */
 ScrollTrigger.addEventListener("refresh", () => locoScroll.update())
 ScrollTrigger.refresh()
