@@ -1,15 +1,24 @@
+/* ====== document ====== */
+const hamburger = document.querySelector('.hamburger')
+const searchBtn = document.querySelector('.search-button')
+const searchBox = document.querySelector('.search-box')
+const sideWidget = document.querySelector('.side-widget')
+const sectionWrapper = document.querySelector('.section-wrapper')
+const preloader = document.getElementById("preloader")
+const progressBar = document.getElementById("progress-bar")
+
 /* ====== hamburger ====== */
-document.querySelector(".hamburger").addEventListener("click", function () {
-  document.querySelector(".hamburger").classList.toggle("active")
-  document.querySelector(".side-widget").classList.toggle("active")
-  document.querySelector(".section-wrapper").classList.toggle("no-transform")
-})
+hamburger.onclick = () => {
+  hamburger.classList.toggle('active')
+  sideWidget.classList.toggle('active')
+  sectionWrapper.classList.toggle('no-transform')
+}
 
 /* ====== search ====== */
-document.querySelector(".search-button").addEventListener("click", function () {
-  document.querySelector(".search-box").classList.toggle("active")
-  document.querySelector(".section-wrapper").classList.toggle("no-transform")
-})
+searchBtn.onclick = () => {
+  searchBox.classList.toggle('active')
+  sectionWrapper.classList.toggle('no-transform')
+}
 
 /* ====== preloader ====== */
 let settings = {
@@ -28,9 +37,11 @@ function setAttributes(elem, attrs) {
   }
 }
 
-let preloader = document.createElement("div"),
-  canvas = document.createElement("canvas"), size
-(function () {
+/* ====== create element ====== */
+let preloaderDiv = document.createElement('div')
+let canvas = document.createElement('canvas')
+
+function size() {
   let width = window.innerWidth,
     height = window.innerHeight
   if (width > height) {
@@ -38,9 +49,9 @@ let preloader = document.createElement("div"),
   } else {
     size = Math.min(settings.progressSize, width - 50)
   }
-})()
+}
 
-setAttributes(preloader, {
+setAttributes(preloaderDiv, {
   class: "preloader",
   id: "preloader",
   style: "transition: opacity " + settings.preloaderAnimationDuration / 1000 + "s"
@@ -53,23 +64,20 @@ setAttributes(canvas, {
   height: settings.progressSize
 })
 
-preloader = document.getElementById("preloader")
-
-let progressBar = document.getElementById("progress-bar"),
-  images = document.images,
-  imagesAmount = images.length,
-  imagesLoaded = 0,
-  barCtx = progressBar.getContext("2d"),
-  circleCenterX = progressBar.width / 2,
-  circleCenterY = progressBar.height / 2,
-  circleRadius = circleCenterX - settings.lineWidth,
-  degreesPerPercent = 3.6,
-  currentProgress = 0,
-  showedProgress = 0,
-  progressStep = 0,
-  progressDelta = 0,
-  startTime = null,
-  running
+let images = document.images
+let imagesAmount = images.length
+let imagesLoaded = 0
+let barCtx = progressBar.getContext("2d")
+let circleCenterX = progressBar.width / 2
+let circleCenterY = progressBar.height / 2
+let circleRadius = circleCenterX - settings.lineWidth
+let degreesPerPercent = 3.6
+let currentProgress = 0
+let showedProgress = 0
+let progressStep = 0
+let progressDelta = 0
+let startTime = null
+let running
 
 (function () {
   return (
@@ -96,7 +104,8 @@ barCtx.lineCap = settings.lineCap
 let angleMultiplier = (Math.abs(settings.startDegree) + Math.abs(settings.finalDegree)) / 360
 let startAngle = Math.radians(settings.startDegree)
 
-document.body.style.overflowY = "hidden"
+let body = document.querySelector('body')
+body.style.overflowY = "hidden"
 preloader.style.backgroundColor = settings.preloaderBackground
 for (let i = 0; i < imagesAmount; i++) {
   let imageClone = new Image();
@@ -124,8 +133,7 @@ function animate() {
   if (running === false) {
     startTime = null
     return
-  }
-  let timeDelta = Math.min(1, (performance.now() - startTime) / settings.preloaderAnimationDuration)
+  } let timeDelta = Math.min(1, (performance.now() - startTime) / settings.preloaderAnimationDuration)
   showedProgress = progressStep + progressDelta * timeDelta
 
   if (timeDelta <= 1) {
